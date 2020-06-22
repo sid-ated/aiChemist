@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+.row-header{
+  margin:0px auto;
+  padding:0px auto;
+}
+
+.footer{
+  background-color: #BDB76B;
+  margin:0px auto;
+  padding: 20px 0px 20px 0px;
+}
+.jumbotron {
+  padding:40px 0px 40px 0px;
+  margin:0px auto;
+  background: #1aff1a ;
+  color:floralwhite;
+}
+
+address{
+  font-size:80%;
+  margin:0px;
+  color:#0f0f0f;
+}
+
+.navbar-dark {
+  background-color: #009900;
+}
+h1 {
+   font-weight: bold;
+}
+.jumbotron {
+  padding-top: 80px;
+}
