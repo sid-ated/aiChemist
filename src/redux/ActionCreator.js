@@ -1,12 +1,11 @@
 import * as ActionTypes from './ActionTypes';
-import MEDICINES from '../shared/medicines';
-import COMMENTS from '../shared/comments';
+import { baseUrl } from '../shared/baseUrl';
 
 export const fetchMedicine = () => (dispatch) => {
 
     dispatch(medicinesLoading(true));
 
-    return fetch(MEDICINES)
+    return fetch(baseUrl + 'medicines')
     .then(response => {
         if (response.ok) {
           return response;
@@ -41,7 +40,7 @@ export const addMedicines = (medicines) => ({
 
 
 export const fetchComments = () => (dispatch) => {    
-    return fetch(COMMENTS)
+    return fetch(baseUrl + 'comments')
     .then(response => {
         if (response.ok) {
           return response;
