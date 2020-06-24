@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
 import Home from './HomeComponent';
-//import Payment from './PaymentComponent';
+import Payment from './PaymentComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchMedicine, fetchComments } from '../redux/ActionCreator';
+import { fetchMedicine, fetchComments, loginUser, logoutUser } from '../redux/ActionCreator';
 //import { actions } from 'react-redux-form';
 
 const mapStateToProps = state =>{
     return {
       medicines: state.medicines,
       comments: state.comments,
+      auth: state.auth
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchDishes: () => { dispatch(fetchMedicine())},
+  fetchMedicines: () => { dispatch(fetchMedicine())},
   fetchComments: () => dispatch(fetchComments()),
+  loginUser: (creds) => dispatch(loginUser(creds)),
+  logoutUser: () => dispatch(logoutUser())
 });
 
 
@@ -25,7 +28,7 @@ class Main extends Component {
 
 
   componentDidMount() {
-    this.props.fetchDishes();
+    this.props.fetchMedicines();
     this.props.fetchComments();
   }
 
@@ -40,11 +43,28 @@ class Main extends Component {
       );
     }
 
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route {...rest} render={(props) => (
+        this.props.auth.isAuthenticated
+          ? <Component {...props} />
+          : 
+          <div>
+            <h1>You are not authorized. </h1>
+          </div>
+      )} />
+    );
+
+
     return (
       <div>
-        <Header/>
+        <Header
+          auth={this.props.auth} 
+          loginUser={this.props.loginUser} 
+          logoutUser={this.props.logoutUser} 
+        />
             <Switch>
               <Route path="/home" component={HomePage}/>
+              <PrivateRoute exact path ="/payment" component={() => <Payment/>} />
               <Redirect to="/home" />
             </Switch>
         <Footer/> 

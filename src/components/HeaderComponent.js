@@ -1,4 +1,5 @@
 import React , {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import {Navbar,NavbarBrand,Nav, NavbarToggler,Collapse,NavItem, Jumbotron,Button,Modal,ModalBody,
     ModalHeader,Form, FormGroup, Label, Input, UncontrolledDropdown, DropdownToggle, DropdownMenu,
@@ -18,8 +19,10 @@ class Header extends Component {
         this.toggleNav=this.toggleNav.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
         this.handlelogin=this.handlelogin.bind(this);
+        this.handleLogout=this.handleLogout.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.onMouseLeave = this.onMouseLeave.bind(this);
+        this.toggleDropDown = this.toggleDropDown.bind(this);
     }
 
     toggleNav() {
@@ -35,7 +38,7 @@ class Header extends Component {
 
     }
 
-    toggle1() {
+    toggleDropDown() {
         this.setState(prevState => ({
           dropdownOpen: !this.state.dropdownOpen
         }));
@@ -43,9 +46,13 @@ class Header extends Component {
 
     handlelogin(event){
         this.toggleModal();
-        alert("Username: "+this.username.value+" Password: "+this.password.value+" Remember: "+this.remember.checked);
+        this.props.loginUser({username: this.username.value, password: this.password.value});
         event.preventDefault();
 
+    }
+
+    handleLogout() {
+        this.props.logoutUser();
     }
 
     onMouseEnter() {
@@ -74,7 +81,7 @@ class Header extends Component {
                              </NavItem>
 
                              <NavItem>
-                                 <NavLink className="nav-link" to="/menu" style={{ color: '#2DC8C8 ' }}>
+                                 <NavLink className="nav-link" to="/" style={{ color: '#2DC8C8 ' }}>
                                      <span className="fa fa-list fa-lg"></span> Medical Store
                                  </NavLink>
                              </NavItem>
@@ -98,24 +105,41 @@ class Header extends Component {
                                         <DropdownItem>
                                         Buy Eyewears
                                         </DropdownItem>
-                                        <DropdownItem>
-                                        
+                                        <DropdownItem >
+                                          <Link to="/payment">Payment</Link>
                                         </DropdownItem>
                                         <DropdownItem>
-                                        Reset
+                                        Fuck me this is shit
                                         </DropdownItem>
                                     </DropdownMenu>
                               </UncontrolledDropdown>
                          </Nav>
+                         <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    { !this.props.auth.isAuthenticated ?
+                                        <Button outline onClick={this.toggleModal}>
+                                            <span className="fa fa-sign-in fa-lg"></span> Login
+                                            {this.props.auth.isFetching ?
+                                                <span className="fa fa-spinner fa-pulse fa-fw"></span>
+                                                : null
+                                            }
+                                        </Button>
+                                        :
+                                        <div>
+                                        <div className="navbar-text mr-3">{this.props.auth.user.username}</div>
+                                        <Button outline onClick={this.handleLogout}>
+                                            <span className="fa fa-sign-out fa-lg"></span> Logout
+                                            {this.props.auth.isFetching ?
+                                                <span className="fa fa-spinner fa-pulse fa-fw"></span>
+                                                : null
+                                            }
+                                        </Button>
+                                        </div>
+                                    }
 
+                                </NavItem>
+                            </Nav>
                          </Collapse>
-                         <nav className="ml-auto" navbar>
-                            
-                            <Button outline onClick={this.toggleModal} style={{backgroundColor: '#2DC8C8 ', color: 'white'}}>
-                                <span className="fa fa-sign-in fa-lg"></span> Login
-                            </Button>
-                        
-                         </nav>
                          
                    </div>
                 </Navbar>
@@ -144,14 +168,26 @@ class Header extends Component {
                                 <Input type="password" id="password" name="password"
                                 innerRef={(input)=>this.password=input}/>
                             </FormGroup>
-                            <FormGroup check>
+                            <FormGroup check >
                                 <Label check>
                                     <Input type="checkbox" name="remember"
                                     innerRef={(input)=>this.remember=input}/>
                                     Remember me
                                 </Label>
                             </FormGroup>
-                            <Button type="submit" value="submit" className="bg-primary">Login</Button>
+
+                            <FormGroup>
+                                <Button type="submit" value="submit" className="bg-primary" mt-2>Login</Button>
+                            </FormGroup>
+                            
+                            <FormGroup>
+                                <p style = {{fontSize: 15}}>Sign in with Google</p> 
+                            </FormGroup>
+
+                            <FormGroup>
+                                <p style = {{fontSize: 15}}>Sign in with Facebook</p> 
+                            </FormGroup>
+
                         </Form>
 
                     </ModalBody>
