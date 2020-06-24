@@ -153,3 +153,66 @@ export const logoutUser = () => (dispatch) => {
   //dispatch(favoritesFailed("Error 401: Unauthorized"));
   dispatch(receiveLogout())
 }
+
+export const registerUser = (creds) => (dispatch) => {
+  // We dispatch requestLogin to kickoff the call to the API
+  dispatch(requestRegistration(creds))
+
+  return fetch(authBaseUrl + 'users/register', {
+      method: 'POST',
+      headers: { 
+          'Content-Type':'application/json' 
+      },
+      body: JSON.stringify(creds)
+  })
+  .then(response => {
+      if (response.ok) {
+          return response;
+      } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+      }
+      },
+      error => {
+          throw error;
+      })
+  .then(response => response.json())
+  .then(response => {
+      if (response.success) {
+          // If login was successful, set the token in local storage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('creds', JSON.stringify(creds));
+          // Dispatch the success action
+          //dispatch(fetchFavorites());
+          dispatch(receiveRegistration(response));
+      }
+      else {
+          var error = new Error('Error ' + response.status);
+          error.response = response;
+          throw error;
+      }
+  })
+  .catch(error => dispatch(registrationError(error.message)))
+};
+
+export const requestRegistration = (creds) => {
+  return {
+      type: ActionTypes.REGISTRATION_REQUEST,
+      creds
+  }
+}
+
+export const receiveRegistration = (response) => {
+  return {
+      type: ActionTypes.REGISTRATION_SUCCESS,
+      token: response.token
+  }
+}
+
+export const registrationError = (message) => {
+  return {
+      type: ActionTypes.REGISTRATION_FAILURE,
+      message
+  }
+}

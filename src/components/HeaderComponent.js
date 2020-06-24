@@ -20,6 +20,7 @@ class Header extends Component {
         this.toggleModal=this.toggleModal.bind(this);
         this.handlelogin=this.handlelogin.bind(this);
         this.handleLogout=this.handleLogout.bind(this);
+        this.handleRegister=this.handleRegister.bind(this);
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.onMouseLeave = this.onMouseLeave.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
@@ -48,7 +49,11 @@ class Header extends Component {
         this.toggleModal();
         this.props.loginUser({username: this.username.value, password: this.password.value});
         event.preventDefault();
+    }
 
+    handleRegister(event){
+        this.props.registerUser({username: this.username.value, password: this.password.value});
+        event.preventDefault();
     }
 
     handleLogout() {
@@ -96,7 +101,7 @@ class Header extends Component {
                                 onMouseOver={this.onMouseEnter}
                                 onMouseLeave={this.onMouseLeave}
                                 isOpen={this.state.dropdownOpen}
-                                toggle={this.toggle1}
+                                toggle={this.toggleDropDown }
                              >
                                     <DropdownToggle nav style={{ color: '#2DC8C8 ' }}>
                                         Personal Care
@@ -126,14 +131,14 @@ class Header extends Component {
                                         </Button>
                                         :
                                         <div>
-                                        <div className="navbar-text mr-3">{this.props.auth.user.username}</div>
-                                        <Button outline onClick={this.handleLogout}>
-                                            <span className="fa fa-sign-out fa-lg"></span> Logout
-                                            {this.props.auth.isFetching ?
-                                                <span className="fa fa-spinner fa-pulse fa-fw"></span>
-                                                : null
-                                            }
-                                        </Button>
+                                            <div className="navbar-text mr-3" style={{ color: 'black' }}>Welcome! {this.props.auth.user.username}</div>
+                                            <Button outline onClick={this.handleLogout}>
+                                                <span className="fa fa-sign-out fa-lg"></span> Logout
+                                                {this.props.auth.isFetching ?
+                                                    <span className="fa fa-spinner fa-pulse fa-fw"></span>
+                                                    : null
+                                                }
+                                            </Button>
                                         </div>
                                     }
 
@@ -186,6 +191,10 @@ class Header extends Component {
 
                             <FormGroup>
                                 <p style = {{fontSize: 15}}>Sign in with Facebook</p> 
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Link to="/registration" style = {{fontSize: 15}}>New User? Register here!</Link>
                             </FormGroup>
 
                         </Form>

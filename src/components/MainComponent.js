@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import Home from './HomeComponent';
 import Payment from './PaymentComponent';
+import Registration from './RegistrationComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchMedicine, fetchComments, loginUser, logoutUser } from '../redux/ActionCreator';
+import { fetchMedicine, fetchComments, loginUser, logoutUser, registerUser } from '../redux/ActionCreator';
 //import { actions } from 'react-redux-form';
 
 const mapStateToProps = state =>{
@@ -20,8 +21,9 @@ const mapDispatchToProps = dispatch => ({
   fetchMedicines: () => { dispatch(fetchMedicine())},
   fetchComments: () => dispatch(fetchComments()),
   loginUser: (creds) => dispatch(loginUser(creds)),
-  logoutUser: () => dispatch(logoutUser())
-});
+  logoutUser: () => dispatch(logoutUser()),
+  registerUser: (creds) => dispatch(registerUser(creds))
+}); 
 
 
 class Main extends Component {
@@ -61,9 +63,13 @@ class Main extends Component {
           auth={this.props.auth} 
           loginUser={this.props.loginUser} 
           logoutUser={this.props.logoutUser} 
+          registerUser={this.props.registerUser}
         />
             <Switch>
               <Route path="/home" component={HomePage}/>
+              <Route exact path ="/registration" component = {() => <Registration 
+                                                                registerUser={this.props.registerUser}
+                                                                auth={this.props.auth} />} />
               <PrivateRoute exact path ="/payment" component={() => <Payment/>} />
               <Redirect to="/home" />
             </Switch>
