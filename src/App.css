@@ -7,12 +7,6 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,28 +22,20 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .row-header{
   margin:0px auto;
   padding:0px auto;
 }
 
 .footer{
-  background-color: #BDB76B;
+  background-color: #C0C0C0;
   margin:0px auto;
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
   padding:40px 0px 40px 0px;
   margin:0px auto;
-  background: #1aff1a ;
+  background: #37c08d;
   color:floralwhite;
 }
 
@@ -60,7 +46,7 @@ address{
 }
 
 .navbar-dark {
-  background-color: #009900;
+  background-color: whitesmoke;
 }
 h1 {
    font-weight: bold;
@@ -68,3 +54,4 @@ h1 {
 .jumbotron {
   padding-top: 80px;
 }
+
