@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Home from './HomeComponent';
-import Payment from './PaymentComponent';
-import Registration from './RegistrationComponent';
-import Header from './HeaderComponent';
-import Footer from './FooterComponent';
+import Payment from './UtilComp/PaymentComponent';
+import Registration from './UserRegComponent.js';
+import Header from './UtilComp/HeaderComponent.js';
+import Footer from './UtilComp/FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMedicine, fetchComments, loginUser, logoutUser, registerUser } from '../redux/ActionCreator';

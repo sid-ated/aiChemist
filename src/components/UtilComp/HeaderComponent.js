@@ -7,7 +7,7 @@ import {Navbar,NavbarBrand,Nav, NavbarToggler,Collapse,NavItem, Jumbotron,Button
     DropdownItem,} from 'reactstrap';
 
 import {NavLink} from 'react-router-dom';
-import { baseUrl } from '../shared/baseUrl';
+import { baseUrl } from '../../shared/baseUrl';
 
 class Header extends Component {
     constructor (props){
@@ -75,25 +75,25 @@ class Header extends Component {
                 <Navbar dark fixed="top" expand="md">
                    <div className="container">
                        <NavbarToggler onClick={this.toggleNav}/>
-                         <NavbarBrand className="mr-auto" href='/' style={{ color: '#EC1282 ' }}>
+                         <NavbarBrand className="mr-auto" href='/' >
                              <img src= {baseUrl + "images/logo.png"} height="30" width="30" alt="aichemist"/>
                          </NavbarBrand>
                          <Collapse isOpen={this.state.isNavOpen} navbar>
                          <Nav navbar>
                              <NavItem>
-                                 <NavLink className="nav-link" to="/home" style={{ color: '#2DC8C8'}}>
+                                 <NavLink className="nav-link" to="/home" style={{ color: '#12A28C '}}>
                                      <span className="fa fa-home fa-lg"></span> Home
                                  </NavLink>
                              </NavItem>
 
                              <NavItem>
-                                 <NavLink className="nav-link" to="/" style={{ color: '#2DC8C8 ' }}>
+                                 <NavLink className="nav-link" to="/" style={{ color: '#12A28C ' }}>
                                      <span className="fa fa-list fa-lg"></span> Medical Store
                                  </NavLink>
                              </NavItem>
 
                              <NavItem>
-                                 <NavLink className="nav-link" to="/" style={{ color: '#2DC8C8' }}>
+                                 <NavLink className="nav-link" to="/" style={{ color: '#12A28C ' }}>
                                      <span className="fa fa-comments-o fa-lg"></span> Feedback
                                  </NavLink>
                              </NavItem>
@@ -104,7 +104,7 @@ class Header extends Component {
                                 isOpen={this.state.dropdownOpen}
                                 toggle={this.toggleDropDown }
                              >
-                                    <DropdownToggle nav style={{ color: '#2DC8C8 ' }}>
+                                    <DropdownToggle nav style={{ color: '#12A28C ' }}>
                                         Personal Care
                                     </DropdownToggle>
                                     <DropdownMenu right>
@@ -120,7 +120,7 @@ class Header extends Component {
                                     </DropdownMenu>
                               </UncontrolledDropdown>
                          </Nav>
-                         <Nav className="ml-5 mt-3" navbar>
+                         <Nav className="ml-5 mt-2" navbar>
                                 <NavItem>
                                     <Search
                                     medicine = {this.props.medicine}
@@ -130,8 +130,8 @@ class Header extends Component {
                          <Nav className="ml-auto" navbar>
                                 <NavItem>
                                     { !this.props.auth.isAuthenticated ?
-                                        <Button outline onClick={this.toggleModal}>
-                                            <span className="fa fa-sign-in fa-lg"></span> Login
+                                        <Button outline onClick={this.toggleModal} style={{ backgroundColor: '#12A28C', color: 'white'}}>
+                                            <span className="fa fa-sign-in fa-lg" style={{ color: 'white' }}></span> Login
                                             {this.props.auth.isFetching ?
                                                 <span className="fa fa-spinner fa-pulse fa-fw"></span>
                                                 : null
@@ -140,8 +140,8 @@ class Header extends Component {
                                         :
                                         <div>
                                             <div className="navbar-text mr-3" style={{ color: 'black' }}>Welcome! {this.props.auth.user.username}</div>
-                                            <Button outline onClick={this.handleLogout}>
-                                                <span className="fa fa-sign-out fa-lg"></span> Logout
+                                            <Button outline onClick={this.handleLogout} style={{ backgroundColor: '#12A28C ', color: 'white' }}>
+                                                <span className="fa fa-sign-out fa-lg" style={{ color: 'white' }}></span> Logout
                                                 {this.props.auth.isFetching ?
                                                     <span className="fa fa-spinner fa-pulse fa-fw"></span>
                                                     : null
@@ -202,7 +202,7 @@ class Header extends Component {
                             </FormGroup>
 
                             <FormGroup>
-                                <Link to="/registration" style = {{fontSize: 15}}>New User? Register here!</Link>
+                                <Link to="/registration" style = {{fontSize: 15}} onClick={this.toggleModal}>New User? Register here!</Link>
                             </FormGroup>
 
                         </Form>

@@ -28,14 +28,14 @@
 }
 
 .footer{
-  background-color: #C0C0C0;
+  background-color: #b8e3dd;
   margin:0px auto;
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
   padding:40px 0px 40px 0px;
   margin:0px auto;
-  background: #37c08d;
+  background: #12A28C     ;
   color:floralwhite;
 }
 
@@ -54,4 +54,3 @@ h1 {
 .jumbotron {
   padding-top: 80px;
 }
-
