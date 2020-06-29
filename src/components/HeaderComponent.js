@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Search from './SearchComponent';
 
 import {Navbar,NavbarBrand,Nav, NavbarToggler,Collapse,NavItem, Jumbotron,Button,Modal,ModalBody,
     ModalHeader,Form, FormGroup, Label, Input, UncontrolledDropdown, DropdownToggle, DropdownMenu,
@@ -119,6 +120,13 @@ class Header extends Component {
                                     </DropdownMenu>
                               </UncontrolledDropdown>
                          </Nav>
+                         <Nav className="ml-5 mt-3" navbar>
+                                <NavItem>
+                                    <Search
+                                    medicine = {this.props.medicine}
+                                    />
+                                </NavItem>
+                            </Nav>
                          <Nav className="ml-auto" navbar>
                                 <NavItem>
                                     { !this.props.auth.isAuthenticated ?

@@ -64,6 +64,7 @@ class Main extends Component {
           loginUser={this.props.loginUser} 
           logoutUser={this.props.logoutUser} 
           registerUser={this.props.registerUser}
+          medicine={this.props.medicines.medicines}
         />
             <Switch>
               <Route path="/home" component={HomePage}/>
