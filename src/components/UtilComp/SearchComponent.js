@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
+import { Form, FormControl, Button } from "react-bootstrap";
+import { FaSearch} from 'react-icons/fa';
+import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem,} from 'reactstrap';
 
 class Search extends Component {
+
  state = {
     query: '',
-    results: []
+    results: [],
+    dropDownOpen: false
  }
+
+ componentDidMount() {
+  document.body.addEventListener('click', ()=> {
+    if (this.state.dropdownOpen===true){
+      this.setState({
+        dropdownOpen: false
+      })
+    }
+  });
+}
 
  getInfo = () => {
     this.setState({
@@ -16,8 +31,6 @@ class Search extends Component {
     })
   }
 
-  
-
  handleInputChange = () => {
     this.setState({
       query: this.search.value
@@ -26,11 +39,30 @@ class Search extends Component {
         this.setState({
           results: []
         })
+        if (this.state.dropdownOpen===true){
+          this.setState({
+            dropdownOpen: false
+          })
+        }
       }
       else {
         this.getInfo()
+        if (this.state.dropdownOpen===true){
+          this.setState({
+            dropdownOpen: false
+          })
+        }
+        else {
+          this.setState({
+            dropdownOpen: true
+          })
+        }
       }
     })
+  }
+
+  handleSearchSubmit = () => {
+    console.log("I am working bro");
   }
 
   
@@ -38,23 +70,45 @@ class Search extends Component {
  render() {
 
   const Suggestions = (props) => {
-    const options = props.results.map(r => (
-      <li key={r.id}>
-        {r.name}
-      </li>
-    ))
-    return <ul style={{"list-style-type": "none"}}>{options}</ul>
+    let options;
+    if(this.state.results.length===0){
+      options = <DropdownItem style={{fontSize: 14, color: '#12A28C'}}> No matches found...</DropdownItem>
+    }
+    else{
+        options = props.results.map(r => (
+        <DropdownItem key={r.id} style={{fontSize: 14, color: '#12A28C'}}>
+          {r.name}
+        </DropdownItem >
+      ))
+    }
+    return <DropdownMenu centre>{options}</DropdownMenu>
   }
 
    return (
-     <form>
-       <input
-         placeholder="Search for..."
-         ref={input => this.search = input}
-         onChange={this.handleInputChange}
-       />
-       <Suggestions results={this.state.results} />
-     </form>
+    <Form inline onSubmit={this.handleFormSubmit}>
+      
+      <Dropdown nav inNavbar 
+        isOpen={this.state.dropdownOpen}
+      >
+        <DropdownToggle nav>
+          <FormControl
+            onChange={this.handleInputChange}
+            value={this.state.searchText}
+            type="text"
+            placeholder="Search Medicines..."
+            className="m-auto"
+            size="sm"
+            ref={input => this.search = input}
+          />
+          <Button onClick={this.handleSearchSubmit} size="sm" style={{ backgroundColor: '#12A28C'}}>
+              <FaSearch/>
+          </Button>  
+          </DropdownToggle>
+                                   
+        
+        <Suggestions results={this.state.results} />
+      </Dropdown>
+    </Form>
    )
  }
 }

@@ -1,13 +1,20 @@
 import React , {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Search from './SearchComponent';
+import { FaHospitalAlt, FaClinicMedical, FaBookReader } from 'react-icons/fa';
+import {MdMoreVert} from 'react-icons/md';
+import {TiShoppingCart } from 'react-icons/ti';
+import {IoMdChatbubbles} from 'react-icons/io';
+import {GiArtificialIntelligence, GiHeartBeats} from 'react-icons/gi';
+
+
+
 
 import {Navbar,NavbarBrand,Nav, NavbarToggler,Collapse,NavItem, Jumbotron,Button,Modal,ModalBody,
     ModalHeader,Form, FormGroup, Label, Input, UncontrolledDropdown, DropdownToggle, DropdownMenu,
     DropdownItem,} from 'reactstrap';
 
 import {NavLink} from 'react-router-dom';
-import { baseUrl } from '../../shared/baseUrl';
 
 class Header extends Component {
     constructor (props){
@@ -15,7 +22,8 @@ class Header extends Component {
         this.state={
             isNavOpen: false,
             isModalOpen:false,
-            dropdownOpen:false
+            dropdownOpen:false,
+            dropdownOpen2:false
         };
         this.toggleNav=this.toggleNav.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
@@ -25,6 +33,9 @@ class Header extends Component {
         this.onMouseEnter = this.onMouseEnter.bind(this);
         this.onMouseLeave = this.onMouseLeave.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
+        this.onMouseEnter2 = this.onMouseEnter2.bind(this);
+        this.onMouseLeave2 = this.onMouseLeave2.bind(this);
+        this.toggleDropDown2 = this.toggleDropDown2.bind(this);
     }
 
     toggleNav() {
@@ -43,6 +54,12 @@ class Header extends Component {
     toggleDropDown() {
         this.setState(prevState => ({
           dropdownOpen: !this.state.dropdownOpen
+        }));
+    }
+
+    toggleDropDown2() {
+        this.setState(prevState => ({
+          dropdownOpen2: !this.state.dropdownOpen2
         }));
     }
 
@@ -69,93 +86,145 @@ class Header extends Component {
         this.setState({ dropdownOpen: false });
     }
 
+    onMouseEnter2() {
+        this.setState({ dropdownOpen2: true });
+    }
+    
+    onMouseLeave2() {
+        this.setState({ dropdownOpen2: false });
+    }
+
+
     render() {
         return (
             <>
                 <Navbar dark fixed="top" expand="md">
-                   <div className="container">
-                       <NavbarToggler onClick={this.toggleNav}/>
-                         <NavbarBrand className="mr-auto" href='/' >
-                             <img src= {baseUrl + "images/logo.png"} height="30" width="30" alt="aichemist"/>
-                         </NavbarBrand>
-                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                         <Nav navbar>
-                             <NavItem>
-                                 <NavLink className="nav-link" to="/home" style={{ color: '#12A28C '}}>
-                                     <span className="fa fa-home fa-lg"></span> Home
-                                 </NavLink>
-                             </NavItem>
+                    <div className="container-fluid">
+                        
+                        <NavbarToggler onClick={this.toggleNav}/>
 
-                             <NavItem>
-                                 <NavLink className="nav-link" to="/" style={{ color: '#12A28C ' }}>
-                                     <span className="fa fa-list fa-lg"></span> Medical Store
-                                 </NavLink>
-                             </NavItem>
+                        <NavbarBrand  href='/'>
+                            <GiHeartBeats size="35" color='#12A28C'/>
+                        </NavbarBrand>
+                    
+                        <Collapse isOpen={this.state.isNavOpen} navbar>
+                            
+                            <Nav navbar>
+                                <NavItem className="m-auto">
+                                    <NavLink className="nav-link" to="/home" style={{ color: '#12A28C', fontSize: 14}}>
+                                        <FaClinicMedical size="19"/> Home
+                                    </NavLink>
+                                </NavItem>
 
-                             <NavItem>
-                                 <NavLink className="nav-link" to="/" style={{ color: '#12A28C ' }}>
-                                     <span className="fa fa-comments-o fa-lg"></span> Feedback
-                                 </NavLink>
-                             </NavItem>
+                                <NavItem className="m-auto">
+                                    <NavLink className="nav-link" to="/" style={{ color: '#12A28C', fontSize: 14}}>
+                                        <span><FaHospitalAlt size="19"/> Medical Store</span> 
+                                    </NavLink>
+                                </NavItem>
 
-                             <UncontrolledDropdown nav inNavbar 
-                                onMouseOver={this.onMouseEnter}
-                                onMouseLeave={this.onMouseLeave}
-                                isOpen={this.state.dropdownOpen}
-                                toggle={this.toggleDropDown }
-                             >
-                                    <DropdownToggle nav style={{ color: '#12A28C ' }}>
-                                        Personal Care
-                                    </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem>
-                                        Buy Eyewears
-                                        </DropdownItem>
-                                        <DropdownItem >
-                                          <Link to="/payment">Payment</Link>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                        Fuck me this is shit
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                              </UncontrolledDropdown>
-                         </Nav>
-                         <Nav className="ml-5 mt-2" navbar>
-                                <NavItem>
+                                <NavItem className="m-auto">
+                                    <NavLink className="nav-link" to="/" style={{ color: '#12A28C', fontSize: 14}}>
+                                        <IoMdChatbubbles size="19"/> Chat With Expert
+                                    </NavLink>
+                                </NavItem>
+
+                                <NavItem className="m-auto">
+                                    <UncontrolledDropdown nav inNavbar 
+                                        onMouseOver={this.onMouseEnter2}
+                                        onMouseLeave={this.onMouseLeave2}
+                                        isOpen={this.state.dropdownOpen2}
+                                        toggle={this.toggleDropDown2}
+                                    >
+                                        <DropdownToggle nav style={{ color: '#12A28C', fontSize: 14 }}>
+                                            <GiArtificialIntelligence size="19"/>AI-chemist
+                                        </DropdownToggle>
+                                        <DropdownMenu centre>
+                                            <DropdownItem >
+                                                <Link to="/aisuggest" style={{ color: '#12A28C', fontSize: 14, textDecoration: 'none'  }}>Use AI-chemist</Link>
+                                            </DropdownItem>
+                                            <DropdownItem >
+                                                <Link to="/aifeedback" style={{ color: '#12A28C', fontSize: 14, textDecoration: 'none' }}> Rate AI-chemist</Link>
+                                            </DropdownItem>
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                </NavItem>
+
+                                <NavItem className="m-auto">
+                                    <NavLink className="nav-link" to="/" style={{ color: '#12A28C', fontSize: 14}}>
+                                        <span><FaBookReader size="19" /> Articles</span>
+                                    </NavLink>
+                                </NavItem>
+                                
+                                <NavItem className="m-auto">
+                                    <UncontrolledDropdown nav inNavbar 
+                                        onMouseOver={this.onMouseEnter}
+                                        onMouseLeave={this.onMouseLeave}
+                                        isOpen={this.state.dropdownOpen}
+                                        toggle={this.toggleDropDown }
+                                    >
+                                        <DropdownToggle nav style={{ color: '#12A28C', fontSize: 14 }}>
+                                            <MdMoreVert size="19"/> More
+                                        </DropdownToggle>
+                                        <DropdownMenu centre>
+                                            <DropdownItem >
+                                                <Link to="/contactus" style={{ color: '#12A28C', fontSize: 14, textDecoration: 'none'  }}>Contact Us</Link>
+                                            </DropdownItem>
+                                            <DropdownItem >
+                                                <Link to="/aboutus" style={{ color: '#12A28C', fontSize: 14, textDecoration: 'none' }}>About Us</Link>
+                                            </DropdownItem>
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                </NavItem>
+                            </Nav>
+                            
+                            
+                            <Nav  navbar className="ml-auto">
+                                <NavItem className="m-auto">
                                     <Search
                                     medicine = {this.props.medicine}
                                     />
                                 </NavItem>
-                            </Nav>
-                         <Nav className="ml-auto" navbar>
-                                <NavItem>
+
+                                
+                                <NavItem className="mr-2 mt-1">
+                                    <NavLink className="nav-link" to="/"  style={{ color: '#12A28C', fontSize: 14}}>
+                                        <TiShoppingCart size="28" color='#12A28C'/> Cart
+                                    </NavLink>
+                                </NavItem>
+                                
+
+                                <NavItem className="m-auto" >
+
                                     { !this.props.auth.isAuthenticated ?
-                                        <Button outline onClick={this.toggleModal} style={{ backgroundColor: '#12A28C', color: 'white'}}>
+                                    <div>
+                                        <div className="navbar-text mr-3" style={{ color: '#12A28C', fontSize: 14}}>Welcome, Guest!</div>
+                                        <Button outline onClick={this.toggleModal} size="sm" style={{ backgroundColor: '#12A28C', color: 'white'}}>
                                             <span className="fa fa-sign-in fa-lg" style={{ color: 'white' }}></span> Login
                                             {this.props.auth.isFetching ?
                                                 <span className="fa fa-spinner fa-pulse fa-fw"></span>
                                                 : null
                                             }
                                         </Button>
-                                        :
-                                        <div>
-                                            <div className="navbar-text mr-3" style={{ color: 'black' }}>Welcome! {this.props.auth.user.username}</div>
-                                            <Button outline onClick={this.handleLogout} style={{ backgroundColor: '#12A28C ', color: 'white' }}>
-                                                <span className="fa fa-sign-out fa-lg" style={{ color: 'white' }}></span> Logout
-                                                {this.props.auth.isFetching ?
-                                                    <span className="fa fa-spinner fa-pulse fa-fw"></span>
-                                                    : null
-                                                }
-                                            </Button>
-                                        </div>
+                                    </div>
+                                    :
+                                    <div>
+                                        <div className="navbar-text mr-3" style={{ color: '#12A28C', fontSize: 14 }}>Welcome, {this.props.auth.user.username}!</div>
+                                        <Button outline onClick={this.handleLogout} size="sm" style={{ backgroundColor: '#12A28C ', color: 'white' }}>
+                                            <span className="fa fa-sign-out fa-lg" style={{ color: 'white' }}></span> Logout
+                                            {this.props.auth.isFetching ?
+                                                <span className="fa fa-spinner fa-pulse fa-fw"></span>
+                                                : null
+                                            }
+                                        </Button>
+                                    </div>
                                     }
 
                                 </NavItem>
                             </Nav>
-                         </Collapse>
-                         
-                   </div>
+                        </Collapse>
+                    </div>
                 </Navbar>
+
                 <Jumbotron >
                     <div className="container">
                         <div className="row row-header">
