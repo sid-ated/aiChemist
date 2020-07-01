@@ -13,11 +13,9 @@ class Search extends Component {
 
  componentDidMount() {
   document.body.addEventListener('click', ()=> {
-    if (this.state.dropdownOpen===true){
       this.setState({
-        dropdownOpen: false
+        results: []
       })
-    }
   });
 }
 
@@ -39,24 +37,9 @@ class Search extends Component {
         this.setState({
           results: []
         })
-        if (this.state.dropdownOpen===true){
-          this.setState({
-            dropdownOpen: false
-          })
-        }
       }
       else {
         this.getInfo()
-        if (this.state.dropdownOpen===true){
-          this.setState({
-            dropdownOpen: false
-          })
-        }
-        else {
-          this.setState({
-            dropdownOpen: true
-          })
-        }
       }
     })
   }
@@ -65,13 +48,10 @@ class Search extends Component {
     console.log("I am working bro");
   }
 
-  handleClickItem = () => {
-    console.log("Click Item is working bro");
-  }
 
-  toggleDropDown = () => {
+  handleOnBlur =() => {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      results: []
     })
   }
 
@@ -79,27 +59,23 @@ class Search extends Component {
 
   const Suggestions = (props) => {
     let options;
-    if(this.state.results.length===0){
-      options = <DropdownItem style={{fontSize: 14, color: '#12A28C'}}> No matches found...</DropdownItem>
-    }
-    else{
+    // if(this.state.results.length===0){
+    //   options = <li style={{fontSize: 14, color: '#12A28C'}}> No matches found...</li>
+    // }
+    // else{
         options = props.results.map(r => (
-        <DropdownItem key={r.id} style={{fontSize: 14, color: '#12A28C'}}>
-          <div onClick={this.handleClickItem}>{r.name}</div>
-        </DropdownItem >
+          <li key={r.id} style={{fontSize: 14, color: '#12A28C'}}>
+            <span onClick={this.handleClickItem}>{r.name}</span>
+          </li>
       ))
-    }
-    return <DropdownMenu centre>{options}</DropdownMenu>
+    //}
+    return <ul className="tempsuggest list-unstyled" onBlur={this.handleOnBlur}>{options}</ul>
   }
 
    return (
-    <Form inline onSubmit={this.handleFormSubmit}>
-      
-      <Dropdown nav inNavbar 
-        isOpen={this.state.dropdownOpen}
-        toggle={this.toggleDropDown}
-      >
-        <DropdownToggle nav>
+     
+     <div>
+        <Form inline onSubmit={this.handleFormSubmit}>
           <FormControl
             onChange={this.handleInputChange}
             value={this.state.searchText}
@@ -112,12 +88,13 @@ class Search extends Component {
           <Button onClick={this.handleSearchSubmit} size="sm" style={{ backgroundColor: '#12A28C'}}>
               <FaSearch/>
           </Button>  
-          </DropdownToggle>
-                                   
-        
-        <Suggestions results={this.state.results} />
-      </Dropdown>
-    </Form>
+        </Form>
+        {this.state.results.length!==0 ?
+              <Suggestions results={this.state.results} />
+              :
+              <div></div>
+        }
+      </div>
    )
  }
 }

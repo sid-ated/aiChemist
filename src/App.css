@@ -55,3 +55,12 @@ h1 {
   padding-top: 80px;
 }
 
+.tempsuggest {
+  position: absolute;
+  background-color: white;
+  border-radius: 3px;
+  width: 224px;
+  font-style: italic;
+  border: 1px solid #0f0f0f;
+}
+
