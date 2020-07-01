@@ -8,7 +8,7 @@ class Search extends Component {
  state = {
     query: '',
     results: [],
-    dropDownOpen: false
+    dropdownOpen: false
  }
 
  componentDidMount() {
@@ -65,7 +65,15 @@ class Search extends Component {
     console.log("I am working bro");
   }
 
-  
+  handleClickItem = () => {
+    console.log("Click Item is working bro");
+  }
+
+  toggleDropDown = () => {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    })
+  }
 
  render() {
 
@@ -77,7 +85,7 @@ class Search extends Component {
     else{
         options = props.results.map(r => (
         <DropdownItem key={r.id} style={{fontSize: 14, color: '#12A28C'}}>
-          {r.name}
+          <div onClick={this.handleClickItem}>{r.name}</div>
         </DropdownItem >
       ))
     }
@@ -89,6 +97,7 @@ class Search extends Component {
       
       <Dropdown nav inNavbar 
         isOpen={this.state.dropdownOpen}
+        toggle={this.toggleDropDown}
       >
         <DropdownToggle nav>
           <FormControl
