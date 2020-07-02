@@ -2,55 +2,23 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .row-header{
   margin:0px auto;
   padding:0px auto;
 }
 
 .footer{
-  background-color: #BDB76B;
+  background-color: #b8e3dd;
   margin:0px auto;
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
   padding:40px 0px 40px 0px;
   margin:0px auto;
-  background: #1aff1a ;
+  background: #12A28C     ;
   color:floralwhite;
+  padding-top: 80px;
+  height: 210px;
 }
 
 address{
@@ -59,12 +27,78 @@ address{
   color:#0f0f0f;
 }
 
-.navbar-dark {
-  background-color: #009900;
+.mynav{
+  background-color: whitesmoke;
+  border-bottom: 0.1pt solid black;
 }
+
 h1 {
    font-weight: bold;
 }
-.jumbotron {
-  padding-top: 80px;
+
+
+.tempsuggest {
+  position: absolute;
+}
+
+
+/* .Search{
+  width: 100%;
+  border: 1px solid grey;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgba(0,0,0,.73);
+} */
+
+/* .Search input {
+  width: 100%;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgba(0,0,0,.73);
+  padding: 10px 5px;
+  box-sizing: border-box;
+  outline: none;
+} */
+
+.Search ul {
+  list-style-type: none;
+  background-color: white;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  width: 225px;
+  border-top: 1px solid grey;
+  border-radius: 3px;
+}
+
+.Search ul::before{
+  content: "";
+}
+
+.Search li {
+  padding: 3px 5px;
+  color: black;
+  font-size: 14px;
+}
+
+.Search li:hover{
+  color: #12A28C;
+  cursor: pointer;
+}
+
+.prescription{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+
+.mycaro {
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  overflow: hidden;
 }

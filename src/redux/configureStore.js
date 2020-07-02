@@ -3,6 +3,7 @@ import { Medicines } from './medicine';
 import { Comments } from './comment';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { Auth } from './auth';
 
 //first we will create reducers. Reducers are the functions that take some actions on the state
 //we will create reducers and then import them here and then combine them. That is all we have to
@@ -12,7 +13,8 @@ export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
             medicines: Medicines,
-            comments: Comments
+            comments: Comments,
+            auth: Auth
         }),
 
         applyMiddleware(thunk, logger)

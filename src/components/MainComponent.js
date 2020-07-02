@@ -1,31 +1,36 @@
 import React, {Component} from 'react';
 import Home from './HomeComponent';
-//import Payment from './PaymentComponent';
-import Header from './HeaderComponent';
-import Footer from './FooterComponent';
+import Payment from './UtilComp/PaymentComponent';
+import Registration from './UserRegComponent.js';
+import Header from './UtilComp/HeaderComponent.js';
+import Footer from './UtilComp/FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchMedicine, fetchComments } from '../redux/ActionCreator';
+import { fetchMedicine, fetchComments, loginUser, logoutUser, registerUser } from '../redux/ActionCreator';
 //import { actions } from 'react-redux-form';
 
 const mapStateToProps = state =>{
     return {
       medicines: state.medicines,
       comments: state.comments,
+      auth: state.auth
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchDishes: () => { dispatch(fetchMedicine())},
+  fetchMedicines: () => { dispatch(fetchMedicine())},
   fetchComments: () => dispatch(fetchComments()),
-});
+  loginUser: (creds) => dispatch(loginUser(creds)),
+  logoutUser: () => dispatch(logoutUser()),
+  registerUser: (creds) => dispatch(registerUser(creds))
+}); 
 
 
 class Main extends Component {
 
 
   componentDidMount() {
-    this.props.fetchDishes();
+    this.props.fetchMedicines();
     this.props.fetchComments();
   }
 
@@ -33,18 +38,40 @@ class Main extends Component {
     const HomePage = () =>{
       return(
         <Home 
-              medicine={this.props.medicines.medicines.filter((medicine) => medicine.featured)[0]}
+              medicine={this.props.medicines.medicines}
               medicinesLoading={this.props.medicines.isLoading}
               medicineErrMess={this.props.medicines.errMess}
           />
       );
     }
 
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route {...rest} render={(props) => (
+        this.props.auth.isAuthenticated
+          ? <Component {...props} />
+          : 
+          <div>
+            <h1>You are not authorized. </h1>
+          </div>
+      )} />
+    );
+
+
     return (
       <div>
-        <Header/>
+        <Header
+          auth={this.props.auth} 
+          loginUser={this.props.loginUser} 
+          logoutUser={this.props.logoutUser} 
+          registerUser={this.props.registerUser}
+          medicine={this.props.medicines.medicines}
+        />
             <Switch>
               <Route path="/home" component={HomePage}/>
+              <Route exact path ="/registration" component = {() => <Registration 
+                                                                registerUser={this.props.registerUser}
+                                                                auth={this.props.auth} />} />
+              <PrivateRoute exact path ="/payment" component={() => <Payment/>} />
               <Redirect to="/home" />
             </Switch>
         <Footer/> 

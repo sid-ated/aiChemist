@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
-import { Loading } from './LoadingComponent';
+import { Loading } from './UtilComp/LoadingComponent';
+import MainCarousel from './UtilComp/MainCarouselComponent';
 import { baseUrl } from '../shared/baseUrl';
-//import { FadeTransform } from 'react-animation-components';
 
 function RenderCard({item, isLoading, errMess}){
     if(isLoading){
@@ -17,10 +17,6 @@ function RenderCard({item, isLoading, errMess}){
     }
     else 
         return(
-            // <FadeTransform in 
-            //     transformProps = {{
-            //         exitTransform: 'scale(0.5) translateY(-50%)'
-            //     }}>
                 <Card>
                     <CardImg src={baseUrl + item.image}  alt={item.name} />
                     <CardBody>
@@ -29,7 +25,6 @@ function RenderCard({item, isLoading, errMess}){
                     <CardText>{item.description}</CardText>
                     </CardBody>
                 </Card>
-            //</FadeTransform>
         );
     
 }
@@ -37,6 +32,9 @@ function RenderCard({item, isLoading, errMess}){
 function Home (props){
     return(
         <div className="container">
+            <MainCarousel medicine={props.medicine}
+                isLoading={props.medicinesLoading}
+                errMess={props.medicinesErrMess}/>
             <div className="container">
                 <div className="row align-items-start">
                     <div className="col-12 col-md m-1">
