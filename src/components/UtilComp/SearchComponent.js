@@ -45,7 +45,8 @@ class Search extends Component {
     this.setState({
       searchText: value,
       results: []
-    })
+    });
+    this.handleSearchSubmit();
   }
 
  render() {

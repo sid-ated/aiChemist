@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Search from './SearchComponent';
-import { FaHospitalAlt, FaClinicMedical, FaBookReader } from 'react-icons/fa';
+import { FaHospitalAlt, FaClinicMedical, FaBookReader, FaPrescription } from 'react-icons/fa';
 import {MdMoreVert} from 'react-icons/md';
 import {TiShoppingCart } from 'react-icons/ti';
 import {IoMdChatbubbles} from 'react-icons/io';
@@ -278,7 +278,9 @@ class Header extends Component {
 
                     </ModalBody>
                 </Modal>
-
+                <div className="prescription">
+                    <p><FaPrescription/> Upload a prescription</p>
+                </div>
             </>
         );
 

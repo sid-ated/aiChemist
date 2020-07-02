@@ -86,7 +86,9 @@ h1 {
   text-align: left;
   margin: 0;
   padding: 0;
+  width: 225px;
   border-top: 1px solid grey;
+  border-radius: 3px;
 }
 
 .Search ul::before{
@@ -94,7 +96,7 @@ h1 {
 }
 
 .Search li {
-  padding: 5px 5px;
+  padding: 3px 5px;
   color: black;
   font-size: 14px;
 }
@@ -102,4 +104,12 @@ h1 {
 .Search li:hover{
   color: #12A28C;
   cursor: pointer;
+}
+
+.prescription{
+    position:fixed;
+    bottom:0;
+    right:0;
+    background-color: #12A28C;
+    color: white;
 }
