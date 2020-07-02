@@ -38,7 +38,7 @@ class Main extends Component {
     const HomePage = () =>{
       return(
         <Home 
-              medicine={this.props.medicines.medicines.filter((medicine) => medicine.featured)[0]}
+              medicine={this.props.medicines.medicines}
               medicinesLoading={this.props.medicines.isLoading}
               medicineErrMess={this.props.medicines.errMess}
           />

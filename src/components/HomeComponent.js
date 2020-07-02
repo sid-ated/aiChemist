@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import { Loading } from './UtilComp/LoadingComponent';
+import MainCarousel from './UtilComp/MainCarouselComponent';
 import { baseUrl } from '../shared/baseUrl';
 
 function RenderCard({item, isLoading, errMess}){
@@ -31,6 +32,9 @@ function RenderCard({item, isLoading, errMess}){
 function Home (props){
     return(
         <div className="container">
+            <MainCarousel medicine={props.medicine}
+                isLoading={props.medicinesLoading}
+                errMess={props.medicinesErrMess}/>
             <div className="container">
                 <div className="row align-items-start">
                     <div className="col-12 col-md m-1">

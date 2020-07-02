@@ -2,26 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 .row-header{
   margin:0px auto;
   padding:0px auto;
@@ -37,6 +17,8 @@
   margin:0px auto;
   background: #12A28C     ;
   color:floralwhite;
+  padding-top: 80px;
+  height: 210px;
 }
 
 address{
@@ -45,15 +27,15 @@ address{
   color:#0f0f0f;
 }
 
-.navbar-dark {
+.mynav{
   background-color: whitesmoke;
+  border-bottom: 0.1pt solid black;
 }
+
 h1 {
    font-weight: bold;
 }
-.jumbotron {
-  padding-top: 80px;
-}
+
 
 .tempsuggest {
   position: absolute;
@@ -107,9 +89,16 @@ h1 {
 }
 
 .prescription{
-    position:fixed;
-    bottom:0;
-    right:0;
-    background-color: #12A28C;
-    color: white;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+
+.mycaro {
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  overflow: hidden;
 }

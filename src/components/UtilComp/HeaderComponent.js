@@ -98,7 +98,7 @@ class Header extends Component {
     render() {
         return (
             <>
-                <Navbar dark fixed="top" expand="md">
+                <Navbar dark fixed="top" expand="md" className="mynav">
                     <div className="container-fluid">
                         
                         <NavbarToggler onClick={this.toggleNav}/>
