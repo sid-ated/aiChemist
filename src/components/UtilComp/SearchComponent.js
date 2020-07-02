@@ -1,39 +1,38 @@
 import React, { Component } from 'react';
 import { Form, FormControl, Button } from "react-bootstrap";
 import { FaSearch} from 'react-icons/fa';
-import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem,} from 'reactstrap';
 
 class Search extends Component {
 
  state = {
-    query: '',
     results: [],
-    dropdownOpen: false
+    searchText: ''
  }
 
- componentDidMount() {
-  document.body.addEventListener('click', ()=> {
-      this.setState({
-        results: []
-      })
-  });
-}
+//  componentDidMount() {
+//   document.body.addEventListener('click', ()=> {
+//       this.setState({
+//         results: []
+//       })
+//   });
+// }
 
  getInfo = () => {
     this.setState({
       results: this.props.medicine.filter(
         (m) => {
-          return m.name.indexOf(this.state.query)!==-1;
+          return m.name.indexOf(this.state.searchText)!==-1;
         }
       )
     })
   }
 
- handleInputChange = () => {
+ handleInputChange = (e) => {
+   const value = e.target.value;
     this.setState({
-      query: this.search.value
+      searchText: value
     }, () => {
-      if (this.state.query.length === 0) {
+      if (this.state.searchText.length === 0) {
         this.setState({
           results: []
         })
@@ -49,8 +48,9 @@ class Search extends Component {
   }
 
 
-  handleOnBlur =() => {
+  suggestionsSelected (value) {
     this.setState({
+      searchText: value,
       results: []
     })
   }
@@ -59,22 +59,17 @@ class Search extends Component {
 
   const Suggestions = (props) => {
     let options;
-    // if(this.state.results.length===0){
-    //   options = <li style={{fontSize: 14, color: '#12A28C'}}> No matches found...</li>
-    // }
-    // else{
-        options = props.results.map(r => (
-          <li key={r.id} style={{fontSize: 14, color: '#12A28C'}}>
-            <span onClick={this.handleClickItem}>{r.name}</span>
-          </li>
-      ))
-    //}
+      options = props.results.map(r => (
+        <li key={r.id} style={{fontSize: 14, color: 'white'}} onClick={() => this.suggestionsSelected(r.name)}>
+          {r.name}
+        </li>
+    ))
     return <ul className="tempsuggest list-unstyled" onBlur={this.handleOnBlur}>{options}</ul>
   }
 
    return (
      
-     <div>
+     <div className="AutoCompleteText">
         <Form inline onSubmit={this.handleFormSubmit}>
           <FormControl
             onChange={this.handleInputChange}
@@ -83,7 +78,6 @@ class Search extends Component {
             placeholder="Search Medicines..."
             className="m-auto"
             size="sm"
-            ref={input => this.search = input}
           />
           <Button onClick={this.handleSearchSubmit} size="sm" style={{ backgroundColor: '#12A28C'}}>
               <FaSearch/>
