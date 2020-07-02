@@ -60,16 +60,16 @@ h1 {
 }
 
 
-.AutoCompleteText {
+/* .Search{
   width: 100%;
   border: 1px solid grey;
   box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: rgba(0,0,0,.73);
-}
+} */
 
-.AutoCompleteText input {
+/* .Search input {
   width: 100%;
   border: none;
   font-family: Arial, Helvetica, sans-serif;
@@ -78,25 +78,28 @@ h1 {
   padding: 10px 5px;
   box-sizing: border-box;
   outline: none;
-}
+} */
 
-.AutoCompleteText ul {
+.Search ul {
   list-style-type: none;
+  background-color: white;
   text-align: left;
   margin: 0;
   padding: 0;
   border-top: 1px solid grey;
 }
 
-.AutoCompleteText ul::before{
+.Search ul::before{
   content: "";
 }
 
-.AutoCompleteText li {
-  padding: 10px 5px;
+.Search li {
+  padding: 5px 5px;
+  color: black;
+  font-size: 14px;
 }
 
-.AutoCompleteText li:hover{
-  text-decoration: underline;
-  background-color: #12A28C;
+.Search li:hover{
+  color: #12A28C;
+  cursor: pointer;
 }

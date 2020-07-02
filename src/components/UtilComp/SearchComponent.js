@@ -9,14 +9,7 @@ class Search extends Component {
     searchText: ''
  }
 
-//  componentDidMount() {
-//   document.body.addEventListener('click', ()=> {
-//       this.setState({
-//         results: []
-//       })
-//   });
-// }
-
+ 
  getInfo = () => {
     this.setState({
       results: this.props.medicine.filter(
@@ -60,7 +53,7 @@ class Search extends Component {
   const Suggestions = (props) => {
     let options;
       options = props.results.map(r => (
-        <li key={r.id} style={{fontSize: 14, color: 'white'}} onClick={() => this.suggestionsSelected(r.name)}>
+        <li key={r.id} onClick={() => this.suggestionsSelected(r.name)}>
           {r.name}
         </li>
     ))
@@ -69,7 +62,7 @@ class Search extends Component {
 
    return (
      
-     <div className="AutoCompleteText">
+     <div className="Search">
         <Form inline onSubmit={this.handleFormSubmit}>
           <FormControl
             onChange={this.handleInputChange}
@@ -84,9 +77,9 @@ class Search extends Component {
           </Button>  
         </Form>
         {this.state.results.length!==0 ?
-              <Suggestions results={this.state.results} />
-              :
-              <div></div>
+            <Suggestions results={this.state.results} />
+            :
+            <div></div>
         }
       </div>
    )
