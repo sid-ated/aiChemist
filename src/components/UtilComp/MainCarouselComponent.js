@@ -17,7 +17,7 @@ function MainCarousel(props) {
             src={baseUrl + item.image}
             alt="First slide"
             width="400"
-            height="300"
+            height="200"
           />
           <Carousel.Caption>
             <h3>{item.name}</h3>
@@ -40,7 +40,7 @@ function MainCarousel(props) {
 
     else {
         return (
-        <Carousel activeIndex={index} onSelect={handleSelect}  className="mt-3 mycaro"
+        <Carousel activeIndex={index} onSelect={handleSelect}  className="mt-2 mycaro"
             interval="1000"  keyboard="true" indicator="true"
         >
             {Example}
