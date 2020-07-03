@@ -39,6 +39,11 @@ h1 {
 
 .tempsuggest {
   position: absolute;
+  max-height: 240px;
+  
+  overflow: auto;
+  scrollbar-width: none;
+  
 }
 
 
