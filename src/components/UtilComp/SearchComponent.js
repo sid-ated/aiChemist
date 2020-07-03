@@ -9,7 +9,23 @@ class Search extends Component {
     searchText: ''
  }
 
- 
+ componentWillMount () {
+   document.addEventListener('mousedown', this.handleClick, false);
+ }
+
+ componentWillUnmount () {
+  document.removeEventListener('mousedown', this.handleClick, false);
+ }
+
+ handleClick = (e) => {
+   if(!this.node.contains(e.target)) {
+      this.setState({
+        results: []
+      })
+   }
+ }
+
+
  getInfo = () => {
     this.setState({
       results: this.props.medicine.filter(
@@ -37,22 +53,13 @@ class Search extends Component {
   }
 
   handleSearchSubmit = () => {
-    console.log("I am working bro");
-    alert("I am");
-  }
-
-  handleOnBlur =(event)=> {
-    const value=event.target.value;
-    this.setState({
-      searchText: value,
-      results: []
-    });
+    alert("I am working");
   }
 
   suggestionsSelected (value) {
     this.setState({
       searchText: value,
-      
+      results: []
     });
     
   }
@@ -63,7 +70,7 @@ class Search extends Component {
   const Suggestions = (props) => {
     let options;
       options = props.results.map(r => (
-        <li key={r.id} onMouseOver={() => this.suggestionsSelected(r.name)}>
+        <li key={r.id} onClick={() => this.suggestionsSelected(r.name)}>
           {r.name}
         </li>
     ))
@@ -72,12 +79,12 @@ class Search extends Component {
 
    return (
      
-     <div className="Search">
+     <div className="Search" ref={node=> this.node = node}>
         <Form inline onSubmit={this.handleFormSubmit}>
           <FormGroup>
           <FormControl
-            onBlur={this.handleOnBlur}
             onChange={this.handleInputChange}
+            onClick={this.handleInputChange}
             value={this.state.searchText}
             type="text"
             placeholder="Search Medicines..."
