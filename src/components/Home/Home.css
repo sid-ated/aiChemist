@@ -1,0 +1,11 @@
+.mycaro {
+    width: 100%;
+    overflow: hidden;
+}
+
+.mycard:hover{
+    border: blue;
+    box-sizing: border-box;
+    background-color: brown;
+}
+

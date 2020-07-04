@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 import { baseUrl } from '../../shared/baseUrl';
-import { Loading } from './LoadingComponent';
+import { Loading } from '../UtilComp/LoadingComponent';
  
 function MainCarousel(props) {
     const [index, setIndex] = useState(0);
@@ -9,7 +9,7 @@ function MainCarousel(props) {
     const handleSelect = (selectedIndex, e) => {
       setIndex(selectedIndex);
     };
-
+ 
     let Example = props.medicine.map(item => (
         <Carousel.Item>
           <img
@@ -40,7 +40,7 @@ function MainCarousel(props) {
 
     else {
         return (
-        <Carousel activeIndex={index} onSelect={handleSelect}  className="mt-2 mycaro"
+        <Carousel activeIndex={index} onSelect={handleSelect}  className="mt-1 mycaro"
             interval="1000"  keyboard="true" indicator="true"
         >
             {Example}

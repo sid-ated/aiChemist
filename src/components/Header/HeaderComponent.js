@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import {Link} from 'react-router-dom';
+import './Header.css';
 import Search from './SearchComponent';
 import { FaHospitalAlt, FaClinicMedical, FaBookReader, FaPrescription } from 'react-icons/fa';
 import {MdMoreVert} from 'react-icons/md';
