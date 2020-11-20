@@ -1,6 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 import { authBaseUrl } from '../shared/authBaseUrl';
+import { aisuggestUrl } from '../shared/aisuggestUrl';
 
 export const fetchMedicine = () => (dispatch) => {
 
@@ -39,6 +40,36 @@ export const addMedicines = (medicines) => ({
     payload: medicines
 });
 
+export const fetchSymptoms = () => (dispatch) => {
+
+  return fetch(aisuggestUrl + 'get_symptoms')
+  .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+          var errmess = new Error(error.message);
+          throw errmess;
+    })
+  .then(response => response.json())
+  .then(symptoms => dispatch(addSymptoms(symptoms)))
+  .catch(error => dispatch(symptomsFailed(error.message)));
+}
+
+export const symptomsFailed = (errmess) => ({
+  type: ActionTypes.SYMPTOMS_FAILED,
+  payload: errmess
+});
+
+export const addSymptoms = (symptoms) => ({
+  type: ActionTypes.ADD_SYMPTOMS,
+  payload: symptoms
+});
 
 export const fetchComments = () => (dispatch) => {    
     return fetch(baseUrl + 'comments')

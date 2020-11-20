@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Medicines } from './medicine';
 import { Comments } from './comment';
+import { Symptoms } from './symptoms';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Auth } from './auth';
@@ -14,7 +15,8 @@ export const ConfigureStore = () => {
         combineReducers({
             medicines: Medicines,
             comments: Comments,
-            auth: Auth
+            auth: Auth,
+            symptoms: Symptoms
         }),
 
         applyMiddleware(thunk, logger)
